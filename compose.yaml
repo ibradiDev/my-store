@@ -1,0 +1,24 @@
+services:
+  adminer:
+    image: "adminer:4.8.1-standalone"
+    container_name: mysql-ihm
+    ports:
+      - 9091:8080
+    networks:
+      - applications-network
+
+  mysql:
+    image: "mysql:8.0"
+    container_name: db-grocart
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: grocart
+    networks:
+      - applications-network
+
+networks:
+  applications-network:
+    external: true
+    name: applications-network
